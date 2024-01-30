@@ -4,6 +4,7 @@ $routerArray = [
     'blogpost' => '../app/controllers/blogPostController.php',
     '/' => '../app/controllers/homeController.php',
     '404' => '../resources/views/errors/404.php',
+    'createArticle' => '../app/controllers/blogPostCreateController.php'
 ];
 
 $action = filter_input(INPUT_GET, 'action',FILTER_SANITIZE_SPECIAL_CHARS);

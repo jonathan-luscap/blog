@@ -9,6 +9,7 @@ F -- Yes --> E
 F -- No --> G[End]
 ```
 
+user affiche l'accueil
 ```mermaid
 sequenceDiagram
 User ->> index.php: ?action=
@@ -25,6 +26,7 @@ homeController.php->>home.tpl.php: blogPosts
 home.tpl.php-->>User: display blogPosts
 ```
 
+user affiche un article
 ```mermaid
 sequenceDiagram
 User->>index.php: ?action=displayArticle
@@ -37,6 +39,23 @@ PDOStatement-->>blogPostData.php: isSuccess
 blogPostData.php->>PDOStatement: fetchAll()
 PDOStatement-->>blogPostData.php: blogPosts
 blogPostData.php-->>blogPostController.php: article
-blogPostController.php->>home.tpl.php: article
-home.tpl.php-->>User: display article
+blogPostController.php->>blogPost.tpl.php: article
+blogPost.tpl.php-->>User: display article
+```
+
+user ajoute un article
+```mermaid
+sequenceDiagram
+User->>index.php: ?action=addArticle
+index.php->>blogPostController.php: include()
+blogPostController.php->>blogPostData.php: blogPostByld()
+blogPostData.php->>PDO: prepare()
+PDO-->>blogPostData.php: PDOStatement
+blogPostData.php->>PDOStatement: execute()
+PDOStatement-->>blogPostData.php: isSuccess
+blogPostData.php->>PDOStatement: fetchAll()
+PDOStatement-->>blogPostData.php: blogPosts
+blogPostData.php-->>blogPostController.php: article
+blogPostController.php->>blogPost.tpl.php: article
+blogPost.tpl.php-->>User: display article
 ```

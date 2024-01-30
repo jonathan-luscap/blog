@@ -18,3 +18,5 @@ require_once '../resources/views/layouts/header.tpl.php';?>
         <?php endif; ?>
     </aside>
 </section>
+<?php
+require_once '../resources/views/layouts/footer.tpl.php';?>
