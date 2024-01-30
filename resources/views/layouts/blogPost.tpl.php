@@ -2,24 +2,19 @@
 require_once '../resources/views/layouts/header.tpl.php';?>
 <section class="article">
     <article>
-        <h3><?=$chosenArticle[title]?></h3>
-        <p class="articleText"><?=$chosenArticle[text]?></p>
-        <p>Par <?=$chosenArticle[pseudo]?>, le <?=$chosenArticle[DATE_FORMAT(articles.pub_date, '%d %c %Y')]?>.</p>
+        <h3>Article : <?=$selectedArticle['title']?></h3>
+        <p class="articleText"><?=$selectedArticle['text']?></p>
+        <p>Par <?=$selectedArticle['pseudo']?>, le <?=$selectedArticle["date"]?>.</p>
     </article>
     <aside>
+        <h4>Commentaires :</h4>
         <?php if (!$articleComments):?>
             <p>Aucun commentaire</p>
         <?php else:
             foreach ($articleComments as $key => $comment) :?>
-                <p><?=$comment[text]?></p>
-                <p>Par <?=$comment[pseudo]?>, le <?=$comment[DATE_FORMAT(comments.date, '%d %c %Y')]?></p>
+                <p><?=$comment['text']?></p>
+                <p>Par <?=$comment['pseudo']?>, le <?=$comment["date"]?>.</p>
+            <?php endforeach; ?>
         <?php endif; ?>
     </aside>
 </section>
-
-
-
-
-
-require_once '../resources/views/layouts/footer.tpl.php';
-endif?>

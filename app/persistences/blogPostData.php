@@ -13,7 +13,7 @@ function lastBlogPosts(PDO $pdoConnection, int $nbArticles){
 }
 
 function blogPostById(PDO $pdoConnection, int $articleId){
-    PDOStatement : $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y'), articles.id
+    PDOStatement : $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y') as date, articles.id
                                 FROM articles
                                 INNER JOIN authors
                                 ON articles.authors_id=authors.id
@@ -23,13 +23,13 @@ function blogPostById(PDO $pdoConnection, int $articleId){
 }
 
 function commentsByBlogPost(PDO $pdoConnection, int $articleId){
-    PDOStatement : $statement = $pdoConnection->query("SELECT comments.text, DATE_FORMAT(comments.date, '%d %c %Y'), authors.pseudo
-                                FROM articles
-                                INNER JOIN comments
-                                ON articles.id=comments.articles_id
-                                INNER JOIN authors
-                                ON comments.author_id=authors.id
-                                WHERE articles.id=$articleId");
+    PDOStatement : $statement = $pdoConnection->query("SELECT c.text, DATE_FORMAT(c.date, '%d %c %Y') as date, au.pseudo
+                                FROM articles a
+                                INNER JOIN comments c
+                                ON a.id=c.articles_id
+                                INNER JOIN authors au
+                                ON c.authors_id=au.id
+                                WHERE au.id=$articleId");
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
 }
