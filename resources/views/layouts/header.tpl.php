@@ -16,10 +16,17 @@
 
 <body class="container d-flex flex-column">
 
-<header class="box">
-    <nav>
-        <ul>
-            <li><a href="/">Accueil</a> </li>
-        </ul>
+<header class="row">
+    <nav class="navbar navbar-expand-lg py-3">
+        <div class="container"><a href="#" class="navbar-brand text-uppercase font-weight-bold">Transparent Nav</a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="/" class="nav-link text-uppercase font-weight-bold">Accueil</a> </li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">A propos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Galerie</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </header>

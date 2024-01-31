@@ -2,7 +2,7 @@
 
 include '../doc/variables.php';
 function lastBlogPosts(PDO $pdoConnection, int $nbArticles){
-    $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y'), articles.id
+    $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y') AS date, articles.id
                                 FROM articles
                                 INNER JOIN authors
                                 ON articles.authors_id=authors.id
@@ -13,7 +13,7 @@ function lastBlogPosts(PDO $pdoConnection, int $nbArticles){
 }
 
 function blogPostById(PDO $pdoConnection, int $articleId){
-    $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y') as date, articles.id, articles.weight
+    $statement = $pdoConnection->query("SELECT articles.title, articles.text, authors.pseudo, DATE_FORMAT(articles.pub_date, '%d %c %Y') AS date, articles.id, articles.weight
                                 FROM articles
                                 INNER JOIN authors
                                 ON articles.authors_id=authors.id
@@ -22,13 +22,13 @@ function blogPostById(PDO $pdoConnection, int $articleId){
 }
 
 function commentsByBlogPost(PDO $pdoConnection, int $articleId){
-    $statement = $pdoConnection->query("SELECT c.text, DATE_FORMAT(c.date, '%d %c %Y') as date, au.pseudo
+    $statement = $pdoConnection->query("SELECT c.text, DATE_FORMAT(c.date, '%d %c %Y') AS date, au.pseudo
                                 FROM articles a
                                 INNER JOIN comments c
                                 ON a.id=c.articles_id
                                 INNER JOIN authors au
                                 ON c.authors_id=au.id
-                                WHERE au.id=$articleId");
+                                WHERE a.id=$articleId");
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -58,4 +58,14 @@ function blogPostDelete(PDO $pdoConnection, int $articleId){
     $request = $pdoConnection->prepare("DELETE FROM articles
                                 WHERE articles.id = ?");
     $request->execute([$articleId]);
+}
+
+function blogPostsByCategory(PDO $pdoConnection, String $category){
+    $statement = $pdoConnection->query("SELECT a.title, a.text, DATE_FORMAT(a.pub_date, '%d %c %Y') AS date, a.weight, au.pseudo
+                                FROM articles a
+                                INNER JOIN authors au ON a.authors_id = au.id
+                                INNER JOIN articles_has_categories ac ON a.id = ac.articles_id
+                                INNER JOIN categories c ON ac.categories_id = c.id
+                                WHERE c.name = '$category'");
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
