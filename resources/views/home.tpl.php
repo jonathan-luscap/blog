@@ -12,10 +12,10 @@ else :
             <p class="articlePubDate" ><?= $article["DATE_FORMAT(articles.pub_date, '%d %c %Y')"] ?></p>
         </article>
     <?php endforeach;
-
-    require_once '../resources/views/layouts/footer.tpl.php';
 endif; ?>
 </section>
 <aside class="container">
     <a href="/?action=createArticle">Rédiger un nouvel article</a>
 </aside>
+<?php
+require_once '../resources/views/layouts/footer.tpl.php';
