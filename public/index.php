@@ -5,7 +5,8 @@ $routerArray = [
     '/' => '../app/controllers/homeController.php',
     '404' => '../resources/views/errors/404.php',
     'createArticle' => '../app/controllers/blogPostCreateController.php',
-    'updateArticle' => '../app/controllers/blogPostModifyController.php'
+    'updateArticle' => '../app/controllers/blogPostModifyController.php',
+    'deleteArticle' => '../app/controllers/blogPostDeleteController.php'
 ];
 
 $action = filter_input(INPUT_GET, 'action',FILTER_SANITIZE_SPECIAL_CHARS);

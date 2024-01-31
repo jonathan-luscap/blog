@@ -53,3 +53,9 @@ function authorsByBlogPost(PDO $pdoConnection, int $articleId){
                                 WHERE $articleId=a.id");
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
+
+function blogPostDelete(PDO $pdoConnection, int $articleId){
+    $request = $pdoConnection->prepare("DELETE FROM articles
+                                WHERE articles.id = ?");
+    $request->execute([$articleId]);
+}

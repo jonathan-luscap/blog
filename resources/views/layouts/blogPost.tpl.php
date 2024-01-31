@@ -18,8 +18,9 @@ require_once '../resources/views/layouts/header.tpl.php';?>
         <?php endif; ?>
     </aside>
 </section>
-<aside class="container">
-    <a href="/?action=updateArticle&id=<?=$selectedArticle['id']?>">Modifier cet article</a>
+<aside class="container" id="control">
+    <a href="/?action=updateArticle&id=<?=$selectedArticle['id']?>">Modifier</a>
+    <a href="/?action=deleteArticle&id=<?=$selectedArticle['id']?>">Effacer</a>
 </aside>
 <?php
 require_once '../resources/views/layouts/footer.tpl.php';?>
